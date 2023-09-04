@@ -1,1 +1,0 @@
-print("swift: hello world")
