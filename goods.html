@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel = "stylesheet" href = "menubar.css">
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <script src ="menubar.js"></script>
   <title>メニューバー</title>
 </head>
@@ -20,8 +22,8 @@
 
   <!--goods.htmlの本文-->
   <h1>Goods</h1>
-  member = ["卍","ちょり","STK","sae"]
   <py-script>
+    member = ["卍","ちょり","STK","sae"]
     for i in member:
       print(i)
   </py-script>
