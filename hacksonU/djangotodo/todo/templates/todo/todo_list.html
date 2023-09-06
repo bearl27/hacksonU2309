@@ -42,7 +42,6 @@
 
         <div>
             <a href="{% url 'todo_home' %}"><button type="button" class="ms-1 btn btn-primary"> todoリスト</button></a>
-            <button type="button" class="ms-1 btn btn-primary">カレンダー</button>
         </div>
 
 
@@ -60,7 +59,7 @@
         </tr>
         {% for task in tasks %}
         <tr>
-            <td><a href="{% url 'detail' task.pk %}">a</a></td>
+            <td><a href="{% url 'detail' task.pk %}">1</a></td>
             <td><a href="{% url 'detail' task.pk %}">2</a></td>
             <td>3</td>
             <td>4</td>
