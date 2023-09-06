@@ -58,16 +58,16 @@
             <th>Fri</th>
             <th>Sat</th>
         </tr>
+        {% for task in tasks %}
         <tr>
-            {% for task in tasks %}
-            <td><a href="{% url "detail" task.pk %}">1</a></td>
-            {% endfor %}
-            <td>2</td>
+            <td><a href="{% url 'detail' task.pk %}">1</a></td>
+            <td><a href="{% url 'detail' task.pk %}">2</a></td>
             <td>3</td>
             <td>4</td>
             <td>5</td>
             <td>6</td>
         </tr>
+        {% endfor %}
         <tr>
             <td>7</td>
             <td>8</td>
