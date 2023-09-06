@@ -1,7 +1,14 @@
-<h1>Todo Home</h1>
+<h1>Todo リスト</h1>
 
 <div>
-    <h2>{{task.title}}</h2>
-    <p>{{task.deadline}}</p>
-    <p>{{task.description}}</p>
+    <h1>Tasks</h1>
+<ul>
+    {% for task in tasks %}
+        <li>
+            <strong>{{ task.title }}</strong><br>
+            Deadline: {{ task.deadline }}<br>
+            Description: {{ task.description }}
+        </li>
+    {% endfor %}
+</ul>
 </div>
