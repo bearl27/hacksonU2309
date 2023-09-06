@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-from .models import Task, Todo
+from .models import Todo
 
 
 class TodoList(ListView):
@@ -11,6 +11,6 @@ class TodoDetail(DetailView):
     context_object_name = "task"
 
 class TaskListView(ListView):
-    model = Task
-    template_name = 'todo/templates/todo/todo_home.html'  # あなたのテンプレート名に合わせて変更
+    model = Todo
+    template_name = 'todo/templates/todo/todo_home.html'
     context_object_name = 'tasks'
