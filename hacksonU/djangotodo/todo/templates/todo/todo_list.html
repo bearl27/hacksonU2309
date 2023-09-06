@@ -19,7 +19,7 @@
         table {
             border-collapse: collapse;
         }
-        
+
         th,
         td {
             border: 1px solid black;
@@ -39,10 +39,10 @@
         <div class="alert alert-primary" role="alert">
             A simple primary alert—check it out!
         </div>
-        {% for task in tasks %}
+
         <div class="d-flex justify-content-center">
             <a href="{% url 'todo_home' %}" class="ms-1 btn btn-primary">todoリスト</a>
-            <button type="button" class="ms-1 btn btn-primary">カレンダー</button> {% endfor %}
+            <button type="button" class="ms-1 btn btn-primary">カレンダー</button>
         </div>
 
 
