@@ -12,5 +12,5 @@ class TodoDetail(DetailView):
     context_object_name = "task"
 
 class ToDoHome(TemplateView):
-    template_name = "todo_home.html"
-    context_object_name = "home"
+    template_name = '/Users/taramanjimacbookpro/Documents/GitHub/hacksonU2309/hacksonU/djangotodo/todo/templates/todo/todo_home.html'
+    context_object_name = 'home'

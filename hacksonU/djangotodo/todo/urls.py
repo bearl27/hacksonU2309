@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import TodoDetail, TodoList, ToDoHome
+from . import views
 
 urlpatterns = [
-    path("", TodoList.as_view(), name="list"),
-    path("detail/<int:pk>", TodoDetail.as_view(), name="detail"),
-    path('', ToDoHome.as_view(), name='home')
+    path("", views.TodoList.as_view(), name="list"),
+    path("detail/<int:pk>", views.TodoDetail.as_view(), name="detail"),
+    path('todo-home/', views.ToDoHome.as_view(), name='todo_home'),
 ]
