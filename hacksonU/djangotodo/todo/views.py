@@ -1,6 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
-from .models import Todo
+from django.views.generic import ListView, DetailView
+from .models import Task, Todo
 
 
 class TodoList(ListView):
@@ -11,6 +10,7 @@ class TodoDetail(DetailView):
     model = Todo
     context_object_name = "task"
 
-class ToDoHome(TemplateView):
-    template_name = '/Users/taramanjimacbookpro/Documents/GitHub/hacksonU2309/hacksonU/djangotodo/todo/templates/todo/todo_home.html'
-    context_object_name = 'home'
+class TaskListView(ListView):
+    model = Task
+    template_name = 'todo/templates/todo/todo_home.html'  # あなたのテンプレート名に合わせて変更
+    context_object_name = 'tasks'
