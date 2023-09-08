@@ -205,7 +205,7 @@
         </ul>
     </nav>
 
-    <h1 id="tit">今日のToDo</h1>
+    <h1 id="tit">今月のToDo</h1>
     <h2>重さ考慮</h2>
 
     <div>
@@ -215,8 +215,8 @@
             <table>
 
                 {% for task in tasks %}
-                {% with task.deadlineday|date:"d" as task_date %}
-                {% if "06" == task_date %}
+                {% with task.deadline|date:"m" as task_month %}
+                {% if "09" == task_month %}
                 <div class="btn-container">
                     <tr>
                         <th>
@@ -233,7 +233,7 @@
                         <br>
                         {{task.description}}<br>
                         <br>
-                        {{task.deadlineday}}<br>
+                        {{task.deadline}}<br>
                         <br>
                         <a href="{% url 'update' task.pk %}">編集</a> <a href="{% url 'delete' task.pk %}">削除</a>
                     </p>
