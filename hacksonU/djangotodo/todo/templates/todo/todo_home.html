@@ -153,7 +153,30 @@
             z-index: 2;
         }
 
+        #add-button {
 
+            width: 50px;
+            /* ボタンの幅 */
+            height: 50px;
+            /* ボタンの高さ */
+            border-radius: 50%;
+            /* ボタンを円形にする */
+            background-color: blue;
+            /* 背景色を青に設定 */
+            color: white;
+            /* テキストの色を白に設定 */
+            font-size: 30px;
+            /* テキストのサイズを調整 */
+            border: none;
+            /* ボーダーを無効にする */
+            cursor: pointer;
+            /* カーソルをポインターに変更 */
+            position: fixed;
+            top: 90%;
+            right: 3%;
+            z-index: 2;
+
+        }
 
 
         table {
@@ -231,6 +254,8 @@
             </table>
         </ul>
     </div>
+
+    <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
 
     <script>
         // ボタン要素とメニューバー要素を取得

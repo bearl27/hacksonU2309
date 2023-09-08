@@ -97,7 +97,22 @@
             z-index: 2;
         }
 
+        #add-button {
 
+            width: 50px; /* ボタンの幅 */
+            height: 50px; /* ボタンの高さ */
+            border-radius: 50%; /* ボタンを円形にする */
+            background-color: blue; /* 背景色を青に設定 */
+            color: white; /* テキストの色を白に設定 */
+            font-size: 30px; /* テキストのサイズを調整 */
+            border: none; /* ボーダーを無効にする */
+            cursor: pointer; /* カーソルをポインターに変更 */
+            position: fixed;
+            top: 90%;
+            right: 3%;
+            z-index: 2;
+
+        }
 
 
         table {
@@ -109,31 +124,6 @@
             border: 1px solid black;
             padding: 5px;
             text-align: center;
-        }
-
-        #add-button {
-
-            width: 50px;
-            /* ボタンの幅 */
-            height: 50px;
-            /* ボタンの高さ */
-            border-radius: 50%;
-            /* ボタンを円形にする */
-            background-color: blue;
-            /* 背景色を青に設定 */
-            color: white;
-            /* テキストの色を白に設定 */
-            font-size: 30px;
-            /* テキストのサイズを調整 */
-            border: none;
-            /* ボーダーを無効にする */
-            cursor: pointer;
-            /* カーソルをポインターに変更 */
-            position: fixed;
-            top: 90%;
-            right: 3%;
-            z-index: 2;
-
         }
     </style>
 </head>
@@ -151,31 +141,9 @@
         </ul>
     </nav>
 
-    <h1 id="tit">Todoリスト一覧</h1>
-    <h2>重さ考慮</h2>
-
-    <div>
-        <h1>Tasks</h1>
-        <ul>
-            {% for task in tasks %}
-            <table>
-                <tr>
-                    <th>{{ task.title }}</th>
-                    <th>{{ task.deadline }}</th>
-                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
-                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
-                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>
-                </tr>
-            </table>
-            {% endfor %}
-        </ul>
-    </div>
+    <h1 id="tit">カテゴリー管理</h1>
 
     <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
-
-
-
-
     <script>
         // ボタン要素とメニューバー要素を取得
         const toggleButton = document.getElementById('toggle-button');
