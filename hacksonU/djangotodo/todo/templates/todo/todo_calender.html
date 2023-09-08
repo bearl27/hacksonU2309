@@ -179,7 +179,7 @@
                     {% with forloop.counter as day %}
                     {{ day }}<br>
                     {% for task in tasks %}
-                    {% with task.deadline|date:"d" as task_date %}
+                    {% with task.deadlineday|date:"d" as task_date %}
                     {% if day|stringformat:"02d" == task_date %}
                     <a href="{% url 'detail' task.pk %}">{{ task.title }}</a><br>
                     {% endif %}

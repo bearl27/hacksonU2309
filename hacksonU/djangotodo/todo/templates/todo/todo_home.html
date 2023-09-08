@@ -214,10 +214,10 @@
             {% for task in tasks %}
             <table>
                 {% for task in tasks %}
-                {% with task.deadline|date:"d" as task_date %}
+                {% with task.deadlineday|date:"d" as task_date %}
                 {% if "06" == task_date %}
                 <th>{{ task.title }}</th>
-                <th>{{ task.deadline }}</th>
+                <th>{{ task.deadlineday }}</th>
                 <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
                 <th><a href="{% url 'update' task.pk %}">編集</a></th>
                 <th><a href="{% url 'delete' task.pk %}">削除</a></th>
