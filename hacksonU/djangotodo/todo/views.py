@@ -1,16 +1,50 @@
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Todo
+from django.urls import reverse_lazy
 
 
 class TodoList(ListView):
     model = Todo
     context_object_name = "tasks"
 
+
 class TodoDetail(DetailView):
     model = Todo
     context_object_name = "task"
 
+
 class TaskListView(ListView):
     model = Todo
-    template_name = 'todo/templates/todo/todo_home.html'
-    context_object_name = 'tasks'
+    template_name = 'todo/todo_home.html'
+    context_object_name = "tasks"
+
+
+class TodoCreate(CreateView):
+    model = Todo
+    fields = "__all__"
+    success_url = reverse_lazy("list")
+
+
+class TodoUpdate(UpdateView):
+    model = Todo
+    fields = "__all__"
+    success_url = reverse_lazy("list")
+
+
+class TodoDelete(DeleteView):
+    model = Todo
+    context_object_name = "task"
+    success_url = reverse_lazy("list")
+
+
+class TodoCalender(ListView):
+    model = Todo
+    template_name = 'todo/todo_calender.html'
+    context_object_name = "tasks"
+
+
+class TodoCategory(ListView):
+    model = Todo
+    template_name = 'todo/todo_category.html'
+    context_object_name = "tasks"
