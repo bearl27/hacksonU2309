@@ -97,6 +97,62 @@
             z-index: 2;
         }
 
+        #text-button {
+            display: block;
+            cursor: pointer;
+            width: 160px;
+            text-align: center;
+            border: 1px solid #232323;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        button2 {
+            width: 80%;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+
+            /* ボタンにカーソルを当てると、カーソルがポインターに変わる */
+            cursor: pointer;
+        }
+
+        /* ボタンにカーソルを当てたとき、ボタンを半透明にする */
+        button:hover {
+            opacity: 0.7;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #mask {
+            background: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        #modal {
+            background: #fff;
+            width: 50%;
+            padding: 24px;
+            border-radius: 4px;
+            color: red;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
 
 
 
@@ -121,7 +177,7 @@
             <li><a href="{% url 'todo_home' %}">ホーム</a></li>
             <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
-            <li><a href="{% url 'todo_home' %}">カテゴリー管理</a></li>
+            <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
         </ul>
     </nav>
@@ -132,17 +188,39 @@
     <div>
         <h1>Tasks</h1>
         <ul>
-            {% for task in tasks %}
+
             <table>
 
                 {% for task in tasks %}
                 {% with task.deadline|date:"d" as task_date %}
                 {% if "06" == task_date %}
-                <th>{{ task.title }}</th>
-                <th>{{ task.deadline }}</th>
-                <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
-                <th><a href="{% url 'update' task.pk %}">編集</a></th>
-                <th><a href="{% url 'delete' task.pk %}">削除</a></th>
+                <div class="btn-container">
+                    <tr>
+                        <th>
+                            <button2 class="btn-trigger" data-trget="modal">{{task.title}}</button2>
+                        </th>
+                    </tr>
+                </div>
+
+                <div id="mask" class="hidden"></div>
+
+                <section id="modal" class="hidden">
+                    <p>
+                        {{task.title}}<br>
+                        <br>
+                        {{task.description}}<br>
+                        <br>
+                        {{task.deadline}}<br>
+                        <br>
+                        <a href="{% url 'update' task.pk %}">編集</a> <a href="{% url 'delete' task.pk %}">削除</a>
+                    </p>
+                </section>
+
+                <!-- <th>{{ task.title }}</th>
+                    <th>{{ task.deadline }}</th>
+                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
+                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
+                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>  -->
                 {% endif %}
                 {% endwith %}
                 {% endfor %}
@@ -151,7 +229,6 @@
 
                 </tr>
             </table>
-            {% endfor %}
         </ul>
     </div>
 
@@ -159,6 +236,7 @@
         // ボタン要素とメニューバー要素を取得
         const toggleButton = document.getElementById('toggle-button');
         const menuBar = document.getElementById('menu-bar');
+
 
         // ボタンをクリックしたときの動作を設定
         toggleButton.addEventListener("click", () => {
@@ -171,6 +249,28 @@
                 toggleButton.textContent = '≡'; // ボタンのテキストを変更
             }
         });
+
+        // JavaScriptでボタン要素とモーダル要素を取得
+        const btnTriggers = document.querySelectorAll('.btn-trigger');
+        const masks = document.querySelectorAll('[id^="mask"]');
+        const modals = document.querySelectorAll('[id^="modal"]');
+
+        // 各ボタンにクリックイベントを設定
+        btnTriggers.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                masks[index].classList.remove('hidden');
+                modals[index].classList.remove('hidden');
+            });
+        });
+
+        // 各マスクをクリックしたときにモーダルを隠す
+        masks.forEach((mask, index) => {
+            mask.addEventListener('click', () => {
+                mask.classList.add('hidden');
+                modals[index].classList.add('hidden');
+            });
+        });
+
 
     </script>
 </body>
