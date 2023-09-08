@@ -213,7 +213,6 @@
         <ul>
             {% for task in tasks %}
             <table>
-
                 {% for task in tasks %}
                 {% with task.deadline|date:"d" as task_date %}
                 {% if "06" == task_date %}
@@ -244,7 +243,7 @@
             // メニューバーの表示状態を切り替える
             if (menuBar.style.display === 'none' || menuBar.style.display === '') {
                 menuBar.style.display = 'block'; // メニューバーを表示
-                toggleButton.textContent = '×'; // ボタンのテキストを変更
+                toggleButton.textContent = 'x'; // ボタンのテキストを変更
             } else {
                 menuBar.style.display = 'none'; // メニューバーを非表示
                 toggleButton.textContent = '≡'; // ボタンのテキストを変更
