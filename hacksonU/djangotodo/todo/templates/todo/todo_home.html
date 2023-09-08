@@ -211,17 +211,39 @@
     <div>
         <h1>Tasks</h1>
         <ul>
-            {% for task in tasks %}
+
             <table>
 
                 {% for task in tasks %}
-                {% with task.deadline|date:"d" as task_date %}
+                {% with task.deadlineday|date:"d" as task_date %}
                 {% if "06" == task_date %}
-                <th>{{ task.title }}</th>
-                <th>{{ task.deadline }}</th>
-                <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
-                <th><a href="{% url 'update' task.pk %}">編集</a></th>
-                <th><a href="{% url 'delete' task.pk %}">削除</a></th>
+                <div class="btn-container">
+                    <tr>
+                        <th>
+                            <button2 class="btn-trigger" data-trget="modal">{{task.title}}</button2>
+                        </th>
+                    </tr>
+                </div>
+
+                <div id="mask" class="hidden"></div>
+
+                <section id="modal" class="hidden">
+                    <p>
+                        {{task.title}}<br>
+                        <br>
+                        {{task.description}}<br>
+                        <br>
+                        {{task.deadlineday}}<br>
+                        <br>
+                        <a href="{% url 'update' task.pk %}">編集</a> <a href="{% url 'delete' task.pk %}">削除</a>
+                    </p>
+                </section>
+
+                <!-- <th>{{ task.title }}</th>
+                    <th>{{ task.deadline }}</th>
+                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
+                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
+                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>  -->
                 {% endif %}
                 {% endwith %}
                 {% endfor %}
@@ -230,14 +252,16 @@
 
                 </tr>
             </table>
-            {% endfor %}
         </ul>
     </div>
+
+    <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
 
     <script>
         // ボタン要素とメニューバー要素を取得
         const toggleButton = document.getElementById('toggle-button');
         const menuBar = document.getElementById('menu-bar');
+
 
         // ボタンをクリックしたときの動作を設定
         toggleButton.addEventListener("click", () => {
@@ -250,6 +274,28 @@
                 toggleButton.textContent = '≡'; // ボタンのテキストを変更
             }
         });
+
+        // JavaScriptでボタン要素とモーダル要素を取得
+        const btnTriggers = document.querySelectorAll('.btn-trigger');
+        const masks = document.querySelectorAll('[id^="mask"]');
+        const modals = document.querySelectorAll('[id^="modal"]');
+
+        // 各ボタンにクリックイベントを設定
+        btnTriggers.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                masks[index].classList.remove('hidden');
+                modals[index].classList.remove('hidden');
+            });
+        });
+
+        // 各マスクをクリックしたときにモーダルを隠す
+        masks.forEach((mask, index) => {
+            mask.addEventListener('click', () => {
+                mask.classList.add('hidden');
+                modals[index].classList.add('hidden');
+            });
+        });
+
 
     </script>
 </body>
