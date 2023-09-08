@@ -143,6 +143,7 @@
                 </tr>
             </table>
             {% endfor %}
+            <a href="{% url 'create' %}">新規作成</a>
         </ul>
     </div>
 
@@ -156,7 +157,7 @@
             // メニューバーの表示状態を切り替える
             if (menuBar.style.display === 'none' || menuBar.style.display === '') {
                 menuBar.style.display = 'block'; // メニューバーを表示
-                toggleButton.textContent = '×'; // ボタンのテキストを変更
+                toggleButton.textContent = 'x'; // ボタンのテキストを変更
             } else {
                 menuBar.style.display = 'none'; // メニューバーを非表示
                 toggleButton.textContent = '≡'; // ボタンのテキストを変更
