@@ -42,3 +42,9 @@ class TodoCalender(ListView):
     model = Todo
     template_name = 'todo/todo_calender.html'
     context_object_name = "tasks"
+
+
+class TodoCategory(ListView):
+    model = Todo
+    template_name = 'todo/todo_category.html'
+    context_object_name = "tasks"
