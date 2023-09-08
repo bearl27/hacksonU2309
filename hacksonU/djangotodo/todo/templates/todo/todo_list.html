@@ -99,13 +99,13 @@
 
 
 
+
         table {
             border-collapse: collapse;
             margin: 0 auto;
         }
 
-        th,
-        td {
+        th {
             border: 1px solid black;
             padding: 5px;
             text-align: center;
@@ -115,63 +115,37 @@
 
 <body>
     <!-- ボタン要素とメニューバー要素を取得 -->
-    <button id="toggle-button">≡</button>
+    <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
             <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'todo_home' %}">Todoリスト一覧</a></li>
-            <li><a href="{% url 'list' %}">カレンダー</a></li>
+            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'todo_home' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
         </ul>
     </nav>
 
-    </div>
-    <div id="main_calender">
-        <h1 id="tit">SEPTEMBER 2023</h1>
-        <table>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
+    <h1 id="tit">Todoリスト一覧</h1>
+    <h2>重さ考慮</h2>
 
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                {% with ''|center:30 as range %}
-                {% for _ in range %}
-                {% if forloop.counter|add:"-3"|divisibleby:7 %}
-            </tr>
-            <tr>
-                {% endif %}
-                <td>
-                    {% with forloop.counter as day %}
-                    {{ day }}<br>
-                    {% for task in tasks %}
-                    {% with task.deadline|date:"d" as task_date %}
-                    {% if day|stringformat:"02d" == task_date %}
-                    <a href="{% url 'detail' task.pk %}">{{ task.title }}</a><br>
-                    {% endif %}
-                    {% endwith %}
-                    {% endfor %}
-                    {% endwith %}
-                </td>
-                {% endfor %}
-            </tr>
-            {% endwith %}
-
-        </table>
+    <div>
+        <h1>Tasks</h1>
+        <ul>
+            {% for task in tasks %}
+            <table>
+                <tr>
+                    <th>{{ task.title }}</th>
+                    <th>{{ task.deadline }}</th>
+                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
+                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
+                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>
+                </tr>
+            </table>
+            {% endfor %}
+        </ul>
     </div>
 
-    <p><a href="{% url 'create' %}">新規作成</a></p>
     <script>
         // ボタン要素とメニューバー要素を取得
         const toggleButton = document.getElementById('toggle-button');
