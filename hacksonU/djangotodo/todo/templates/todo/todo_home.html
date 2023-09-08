@@ -16,6 +16,8 @@
     <link rel="apple-touch-icon" href="icon.png">
     <meta name="theme-color" content="#fafafa">
 
+    <link rel="stylesheet" href="../css/base.css">
+
     <style>
         /* メニューバーのスタイル */
         @font-face {
@@ -194,14 +196,43 @@
 
 <body>
     <!-- ボタン要素とメニューバー要素を取得 -->
+
+
     <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
-            <li><a href="{% url 'calender' %}">カレンダー</a></li>
-            <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
+
+
+
             <li><a href="{% url 'todo_home' %}">設定</a></li>
+        </ul>
+    </nav>
+
+    <nav id="menu-bar">
+            <a href="option.html">
+                <img src="./image/option.png" alt="option">
+            </a>
+        <ul>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'todo_home' %}">ホーム</a>
+                </span>
+            </li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'list' %}">Todoリスト一覧</a>
+                </span>
+            </li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'calender' %}">カレンダー</a>
+                </span>
+            </li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'category' %}">カテゴリー管理</a>
+                </span>
+            </li>
         </ul>
     </nav>
 
