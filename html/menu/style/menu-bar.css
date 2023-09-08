@@ -1,9 +1,9 @@
 #menu-bar {
     display: none;
     /* 初期状態では非表示 */
-    background-color: #333;
+    background-color: #f8f9ce;
     /* メニューバーの背景色 */
-    color: #fff;
+    color: #000;
     /* メニューバーのテキスト色 */
     padding: 10px;
     /* メニューバーの内側の余白 */
@@ -29,17 +29,8 @@
     align-items: center;
 }
 
-#option-button{
-    background-color: #333;
-    /* ボタンの背景色 */
-    color: #fff;
-    /* ボタンのテキスト色 */
-    border: none;
-    /* ボーダーを無効にする */
-    cursor: pointer;
-    /* カーソルをポインターに変更 */
-    display: flex;
-    justify-content: right;
-    /* 水平方向に中央揃え */
-    align-items: right;
+#option-button {
+    width: 10px; /* 幅を30pxに設定 */
+    height: 10px; /* 高さも30pxに設定 */
+    margin-right: 10px; /* メニューバーからの間隔を設定 */
 }

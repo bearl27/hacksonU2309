@@ -2,10 +2,9 @@
 #toggle-button {
     padding: 10px 20px;
     /* ボタンの余白 */
-    background-color: #333;
+    background-color:  #f8f9ce;
     /* ボタンの背景色 */
-    color: #fff;
-    /* ボタンのテキスト色 */
+    color: #000;
     border: none;
     /* ボーダーを無効にする */
     cursor: pointer;
