@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Todo
+from .models import Todo, TodoDay
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views import generic
 from . import mixins
 
