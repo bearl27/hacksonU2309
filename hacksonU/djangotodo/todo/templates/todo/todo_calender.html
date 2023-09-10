@@ -176,8 +176,8 @@
 
                         {% for task in tasks %}
                         {% with task.deadline|date:"d" as task_date %}
-                        {% if now == task.deadline %}
-                        <br><a href="{% url 'detail' task.pk %}">{{ task.title }}</a>
+                        {% if day.day|stringformat:"02d" == task.deadline|date:"d" and day.month|stringformat:"02d" == task.deadline|date:"m" %}
+                            <br><a href="{% url 'detail' task.pk %}">{{ task.title }}</a>
                         {% endif %}
                         {% endwith %}
                         {% endfor %}
