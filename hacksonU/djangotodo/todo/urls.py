@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TodoDetail, TodoList, TodoCreate, TaskListView, TodoUpdate, TodoDelete, TodoCalender, TodoCategory, MonthCalendar
+from .views import TodoDetail, TodoList, TodoCreate, TaskListView, TodoUpdate, TodoDelete, TodoCalender, TodoCategory
 
 urlpatterns = [
     path("", TodoList.as_view(), name="list"),
