@@ -133,8 +133,8 @@
     <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'list' %}">ホーム</a></li>
+            <li><a href="{% url 'todo_home' %}">今日のTodo</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
@@ -143,7 +143,7 @@
 
     <h1 id="tit">カテゴリー管理</h1>
 
-    <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
+    <p><a href="{% url 'create_todo' %}"><button id="add-button">+</button></a></p>
     <script>
         // ボタン要素とメニューバー要素を取得
         const toggleButton = document.getElementById('toggle-button');

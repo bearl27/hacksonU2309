@@ -1,11 +1,10 @@
 <head>
     <meta charset="utf-8">
-    <title>Rits小町のtodoリスト</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rits小町のTodoリスト-カレンダー</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta property="og:title" content="">
     <meta property="og:type" content="">
@@ -51,7 +50,7 @@
             /* メニューバーの背景色 */
             color: #333;
             /* メニューバーのテキスト色 */
-            padding-top: 50px;
+            padding-top: 50px;9/10
             /* メニューバーの内側の余白 */
             width: 50%;
             height: 100%;
@@ -99,9 +98,9 @@
 
         #add-button {
 
-            width: 50px;
+            width: 40px;
             /* ボタンの幅 */
-            height: 50px;
+            height: 40px;
             /* ボタンの高さ */
             border-radius: 50%;
             /* ボタンを円形にする */
@@ -119,21 +118,15 @@
             top: 90%;
             right: 3%;
             z-index: 2;
-
-        }
-
-        table {
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 5px;
-            text-align: center;
+            padding-bottom: 6px;
+            line-height: 30px;
+            /* テキストの行の高さをボタンの高さと同じに設定 */
         }
     </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -141,60 +134,66 @@
     <button id="toggle-button">≡</button>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'list' %}">ホーム</a></li>
+            <li><a href="{% url 'todo_home' %}">今日のToDo</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
         </ul>
     </nav>
 
-    </div>
-    <div id="main_calender">
-        <h1 id="tit">SEPTEMBER 2023</h1>
-        <table>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
+    <h1 id="tit">カレンダーだよ～</h1>
 
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                {% with ''|center:30 as range %}
-                {% for _ in range %}
-                {% if forloop.counter|add:"-3"|divisibleby:7 %}
-            </tr>
-            <tr>
-                {% endif %}
-                <td>
-                    {% with forloop.counter as day %}
-                    {{ day }}<br>
-                    {% for task in tasks %}
-                    {% with task.deadline|date:"d" as task_date %}
-                    {% if day|stringformat:"02d" == task_date %}
-                    <a href="{% url 'detail' task.pk %}">{{ task.title }}</a><br>
-                    {% endif %}
-                    {% endwith %}
+    <div class="container" mt-3>
+        {% block content %}
+        <a href="{% url 'calender' month_previous.year month_previous.month %}">前月</a>
+        {{ month_current | date:"Y年m月" }}
+        <a href="{% url 'calender' month_next.year month_next.month %}">次月</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    {% for w in week_names %}
+                    <th>{{ w }}</th>
                     {% endfor %}
-                    {% endwith %}
-                </td>
-                {% endfor %}
-            </tr>
-            {% endwith %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for week in month_days %}
+                <tr>
+                    {% for day in week %}
 
+                    {% if now == day %}
+                    <td class="table-success">
+                        {% else %}
+                    <td>
+                        {% endif %}
+
+                        {% if month_current.month != day.month %}
+                        {{ day | date:"m/d" }}
+                        {% else %}
+                        {{ day.day }}
+
+                        {% for task in tasks %}
+                        {% with task.deadline|date:"d" as task_date %}
+                        {% if day.day|stringformat:"02d" == task.deadline|date:"d" and day.month|stringformat:"02d" == task.deadline|date:"m" %}
+                            <br><a href="{% url 'detail' task.pk %}">{{ task.title }}</a>
+                        {% endif %}
+                        {% endwith %}
+                        {% endfor %}
+
+                        {% endif %}
+
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
+        {% endblock %}
     </div>
 
-    <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
+    <p><a href="{% url 'create_todo' %}"><button id="add-button">＋</button></a></p>
 
     <script>
         // ボタン要素とメニューバー要素を取得
@@ -214,4 +213,16 @@
         });
 
     </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>

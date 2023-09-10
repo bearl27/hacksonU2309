@@ -1,7 +1,6 @@
 <head>
     <meta charset="utf-8">
     <title>Rits小町のtodoリスト</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
     <meta name="description" content="">
@@ -143,8 +142,8 @@
     <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'list' %}">ホーム</a></li>
+            <li><a href="{% url 'todo_home' %}">今日のTodo</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
@@ -155,24 +154,27 @@
     <h2>重さ考慮</h2>
 
     <div>
-        <h1>Tasks</h1>
-        <ul>
-            {% for task in tasks %}
-            <table>
-                <tr>
-                    <th>{{ task.title }}</th>
-                    <th>{{ task.deadline }}</th>
-                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
-                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
-                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>
-                </tr>
-            </table>
+        <table>
+            <!-- ヘッダー部分をループの外に移動 -->
+            <tr>
+                <th>内容</th>
+                <th>期限</th>
+                <th>重さ</th>
+            </tr>
+            {% for task in todos %}
+            <tr>
+                <th>{{ task.title }}</th>
+                <th>{{ task.deadline }}</th>
+                <th>{{ task.importance }}</th>
+                <td><a href="{% url 'detail' task.pk %}">詳細</a></td>
+                <td><a href="{% url 'update' task.pk %}">編集</a></td>
+                <td><a href="{% url 'delete' task.pk %}">削除</a></td>
+            </tr>
             {% endfor %}
-            <a href="{% url 'create' %}">新規作成</a>
-        </ul>
+        </table>
     </div>
 
-    <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
+    <p><a href="{% url 'create_todo' %}"><button id="add-button">+</button></a></p>
 
 
 
