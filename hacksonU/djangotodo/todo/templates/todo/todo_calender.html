@@ -50,7 +50,7 @@
             /* メニューバーの背景色 */
             color: #333;
             /* メニューバーのテキスト色 */
-            padding-top: 50px;
+            padding-top: 50px;9/10
             /* メニューバーの内側の余白 */
             width: 50%;
             height: 100%;
@@ -134,8 +134,8 @@
     <button id="toggle-button">≡</button>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'list' %}">ホーム</a></li>
+            <li><a href="{% url 'todo_home' %}">今日のToDo</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
@@ -176,7 +176,7 @@
 
                         {% for task in tasks %}
                         {% with task.deadline|date:"d" as task_date %}
-                        {% if day.day|stringformat:"02d" == task_date %}
+                        {% if now == task.deadline %}
                         <br><a href="{% url 'detail' task.pk %}">{{ task.title }}</a>
                         {% endif %}
                         {% endwith %}
@@ -193,7 +193,7 @@
         {% endblock %}
     </div>
 
-    <p><a href="{% url 'create' %}"><button id="add-button">＋</button></a></p>
+    <p><a href="{% url 'create_todo' %}"><button id="add-button">＋</button></a></p>
 
     <script>
         // ボタン要素とメニューバー要素を取得
