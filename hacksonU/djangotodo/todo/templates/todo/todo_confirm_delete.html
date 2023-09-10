@@ -29,7 +29,7 @@
     <h1>Tasks</h1>
 <h1>タスクの削除</h1>
 <form action="" method="POST">{% csrf_token %}
-    <p>{{task}}</p>
+    <p>{{task.title}}</p>
     <input type="submit" value="delete">
     <div class="container">
 
