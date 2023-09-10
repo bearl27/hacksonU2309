@@ -199,8 +199,8 @@
     <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'list' %}">ホーム</a></li>
+            <li><a href="{% url 'todo_home' %}">今月のTodo</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
@@ -218,7 +218,7 @@
 
                 {% for task in tasks %}
                 {% with task.deadline|date:"m" as task_month %}
-                {% if "09" == task_month %}
+                {% if now == task.deadline %}
                 <div class="btn-container">
                     <tr>
                         <th>
@@ -240,12 +240,7 @@
                         <a href="{% url 'update' task.pk %}">編集</a> <a href="{% url 'delete' task.pk %}">削除</a>
                     </p>
                 </section>
-
-                <!-- <th>{{ task.title }}</th>
-                    <th>{{ task.deadline }}</th>
-                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
-                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
-                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>  -->
+                
                 {% endif %}
                 {% endwith %}
                 {% endfor %}
@@ -257,7 +252,7 @@
         </ul>
     </div>
 
-    <p><a href="{% url 'create' %}"><button id="add-button">+</button></a></p>
+    <p><a href="{% url 'create_todo' %}"><button id="add-button">+</button></a></p>
 
     <script>
         // ボタン要素とメニューバー要素を取得
