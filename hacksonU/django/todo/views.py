@@ -10,6 +10,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.views import generic
 from . import mixins
+from datetime import date
+
 
 class TodoList(ListView):
     model = Todo
@@ -107,11 +109,26 @@ def create_todo(request):
     return render(request, 'todo/todo_form.html', {'form': form})
 
 def todo_list(request):
-    todos_sorted_by_importance = Todo.objects.all().order_by('importance')
+    today = date.today()
+    todos = TodoDay.objects.all()
+
+    def custom_sort(todo):
+        days_difference = (todo.deadline - today).days
+        if days_difference < 0:
+            importance_mapping = {1: 5, 2: 4, 3: 3, 4: 2, 5: 1}
+            importance_value = importance_mapping.get(todo.importance, todo.importance)
+        else:
+            importance_value = todo.importance
+        return importance_value * days_difference
+
+    sorted_todos = sorted(todos, key=custom_sort)
+
     context = {
-        'todos': todos_sorted_by_importance
+        'todos': sorted_todos
     }
+
     return render(request, 'todo/todo_list.html', context)
+
 
 
 def update_tododay(sender, instance, **kwargs):
@@ -124,3 +141,13 @@ def update_tododay(sender, instance, **kwargs):
             'importance': instance.importance
         }
     )
+
+def transform_importance(importance):
+    return 6 - importance
+
+def todo_importance(request):
+    todos_sorted_by_importance = Todo.objects.all().order_by('importance')
+    context = {
+        'todos': todos_sorted_by_importance
+    }
+    return render(request, 'todo/todo_importance.html', context)

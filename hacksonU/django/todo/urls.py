@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TodoDetail,TaskListView, TodoUpdate, TodoDelete, TodoCalender, TodoCategory
+from .views import TodoDetail,TaskListView, TodoUpdate, TodoDelete, TodoCalender, TodoCategory, todo_importance
 from . import views
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
     path('todo_category/', TodoCategory.as_view(), name='category'),
     path('todo_calender/<int:year>/<int:month>/',TodoCalender.as_view(), name='calender'),
     path('create/', views.create_todo, name='create_todo'),
+    path('importance/', todo_importance, name='todo_importance'),
 ]
