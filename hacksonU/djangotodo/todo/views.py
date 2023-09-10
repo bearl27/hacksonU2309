@@ -3,13 +3,7 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from .models import Todo, TodoDay
 from .forms import TodoForm
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.shortcuts import get_object_or_404
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.views import generic
-from . import mixins
+
 
 class TodoList(ListView):
     model = Todo
@@ -36,27 +30,8 @@ class TaskListView(ListView, mixins.MonthCalendarMixin):
 class TodoUpdate(UpdateView):
     model = Todo
     fields = "__all__"
-    success_url = '../..'
+    success_url = reverse_lazy("list")
 
-    def form_valid(self, form):
-        print("form_valid method called")
-
-        response = super().form_valid(form)
-
-
-        todo_day = get_object_or_404(TodoDay, todo=self.object)
-        print(f"Found TodoDay entry: {todo_day.id}")
-
-
-        todo_day.title = self.object.title
-        todo_day.description = self.object.description
-        todo_day.deadline = self.object.deadline
-        todo_day.importance = self.object.importance
-        print(f"Updating TodoDay entry: {todo_day.id} with importance: {todo_day.importance}")
-
-        todo_day.save()
-
-        return response
 
 class TodoDelete(DeleteView):
     model = Todo
@@ -85,42 +60,3 @@ class TodoCategory(ListView):
     model = Todo
     template_name = 'todo/todo_category.html'
     context_object_name = "tasks"
-
-
-def create_todo(request):
-    if request.method == 'POST':
-        form = TodoForm(request.POST)
-        if form.is_valid():
-            todo = form.save()
-
-            TodoDay.objects.create(
-                todo=todo,
-                title=todo.title,
-                description=todo.description,
-                deadline=todo.deadline,
-                importance=todo.importance
-            )
-
-            return redirect('list')
-    else:
-        form = TodoForm()
-    return render(request, 'todo/todo_form.html', {'form': form})
-
-def todo_list(request):
-    todos_sorted_by_importance = Todo.objects.all().order_by('importance')
-    context = {
-        'todos': todos_sorted_by_importance
-    }
-    return render(request, 'todo/todo_list.html', context)
-
-
-def update_tododay(sender, instance, **kwargs):
-    TodoDay.objects.update_or_create(
-        todo=instance,
-        defaults={
-            'title': instance.title,
-            'description': instance.description,
-            'deadline': instance.deadline,
-            'importance': instance.importance
-        }
-    )

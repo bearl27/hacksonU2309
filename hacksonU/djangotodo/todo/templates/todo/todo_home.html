@@ -199,8 +199,8 @@
     <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'list' %}">ホーム</a></li>
-            <li><a href="{% url 'todo_home' %}">今日のTodo</a></li>
+            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
+            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
             <li><a href="{% url 'calender' %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
@@ -241,6 +241,11 @@
                     </p>
                 </section>
 
+                <!-- <th>{{ task.title }}</th>
+                    <th>{{ task.deadline }}</th>
+                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
+                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
+                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>  -->
                 {% endif %}
                 {% endwith %}
                 {% endfor %}
