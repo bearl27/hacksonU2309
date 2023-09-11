@@ -31,6 +31,7 @@
             /* 画面中央に配置 */
             transform: translate(-50%, -50%);
             /* 中央に配置 */
+            overflow-y: auto;
         }
 
         .task{
@@ -45,12 +46,14 @@
             font-size: 100%;
         }
 
-        .switch2__label {
+        /*オンオフスイッチ*/
+        .onoff_label {
             width: 44px;
             position: relative;
             display: inline-block;
+            text-align: right;
         }
-        .switch2__content {
+        .onoff_content {
             display: block;
             cursor: pointer;
             position: relative;
@@ -61,9 +64,9 @@
                 -ms-transition: all .1s .4s;
                 -o-transition: all .1s .4s;
                     transition: all .1s .4s;
-            overflow: hidden;
+                overflow: hidden;
         }
-        .switch2__content:before {
+        .onoff_content:before {
             content: "";
             display: block;
             position: absolute;
@@ -75,7 +78,7 @@
             border-radius: 20px;
             background-color: #dcdcdc;
         }
-        .switch2__content:after {
+        .onoff_content:after {
             content: "";
             display: block;
             position: absolute;
@@ -91,10 +94,10 @@
                 -o-transition: all .5s;
                     transition: all .5s;
         }
-        .switch2__input {
+        .onoff_input {
             display: none;
         }
-        .switch2__circle {
+        .onoff_circle {
             display: block;
             top: 5px;
             left: 5px;
@@ -110,11 +113,11 @@
                 -o-transition: all .5s;
                     transition: all .5s;
         }
-        .switch2__input:checked ~ .switch2__circle {
+        .onoff_input:checked ~ .onoff_circle {
             left: 29px;
             background-color: #fff;
         }
-        .switch2__input:checked ~ .switch2__content {
+        .onoff_input:checked ~ .onoff_content {
             border-color: transparent;
             -webkit-transition: all 0s;
             -moz-transition: all 0s;
@@ -122,7 +125,7 @@
                 -o-transition: all 0s;
                     transition: all 0s;
         }
-        .switch2__input:checked ~ .switch2__content:after {
+        .onoff_input:checked ~ .onoff_content:after {
             background-color: #6495ed;
             width: 100%;
         }
@@ -133,9 +136,30 @@
             _display: inline;
         }
 
+        /*曜日設定*/
+        .day_label{
+            text-align: center;
+            margin-right: 20px;
+        }
+        .day_input{
+            display: none;
+        }
+        .day_span{
+            color: #808080;
+            font-size: 20px;
+            border: 1px solid #808080;
+            border-radius: 50%;
+            padding: 5px 7px; /*上下左右*/
+        }
+        .day_input:checked + .day_span{
+            color:#0000cd;
+            border: 1px solid #0000cd;
+            background: #87cefa;
+        }
+
     </style>
 </head>
-<body style="background-color:#f6f6e6;">
+<body class="body" style="background-color:#f6f6e6;">
     <div id="menu-container">
         <nav id="menu-bar">
             <h2>カテゴリ選択</h2>
@@ -158,13 +182,48 @@
             </form>
 
             <h2 class="text">期日</h2>
-            <label class="switch2__label">
-                <input type="checkbox" class="switch2__input"/>
-                <span class="switch2__content"></span>
-                <span class="switch2__circle"></span>
+            <label class="onoff_label">
+                <input type="checkbox" class="onoff_input"/>
+                <span class="onoff_content"></span>
+                <span class="onoff_circle"></span>
             </label>
-            <h2 class="text" >曜日設定</h2>
+            <h3 class="text" >曜日設定</h3>
 
+            <br></br>
+
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="月" name="day">
+                <span class="day_span">月</span>
+            </label>
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="火" name="day">
+                <span class="day_span">火</span>
+            </label>
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="水" name="day">
+                <span class="day_span">水</span>
+            </label>
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="木" name="day">
+                <span class="day_span">木</span>
+            </label>
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="金" name="day">
+                <span class="day_span">金</span>
+            </label>
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="土" name="day">
+                <span class="day_span">土</span>
+            </label>
+            <label class="day_label">
+                <input class="day_input" type="checkbox" value="日" name="day">
+                <span class="day_span">日</span>
+            </label>
+
+            <br></br>
+
+            <h3 style="text-align: right;">時間指定</h3>
+            <input type="time" name="time">
 
         </nav>
     </div>
