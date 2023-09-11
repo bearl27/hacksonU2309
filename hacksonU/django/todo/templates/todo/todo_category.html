@@ -135,7 +135,9 @@
         <ul>
             <li><a href="{% url 'list' %}">ホーム</a></li>
             <li><a href="{% url 'todo_home' %}">今日のTodo</a></li>
-            <li><a href="{% url 'calender' %}">カレンダー</a></li>
+            {% now "Y" as current_year %}
+            {% now "m" as current_month %}
+            <li><a href="{% url 'calender' year=current_year month=current_month %}">カレンダー</a></li>
             <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
             <li><a href="{% url 'todo_home' %}">設定</a></li>
         </ul>
