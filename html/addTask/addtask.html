@@ -71,9 +71,9 @@
             height: calc(100% - 4px);
             top: 0;
             left: 0;
-            border: 1.5px solid #000000;
+            border: 2px solid #000000;
             border-radius: 20px;
-            background-color: #fff;
+            background-color: #dcdcdc;
         }
         .switch2__content:after {
             content: "";
@@ -123,12 +123,19 @@
                     transition: all 0s;
         }
         .switch2__input:checked ~ .switch2__content:after {
-            background-color: #00c4cc;
+            background-color: #6495ed;
             width: 100%;
         }
+
+        .text{
+            /*改行を防ぐ*/
+            display: inline-block;
+            _display: inline;
+        }
+
     </style>
 </head>
-<body>
+<body style="background-color:#f6f6e6;">
     <div id="menu-container">
         <nav id="menu-bar">
             <h2>カテゴリ選択</h2>
@@ -150,12 +157,13 @@
                 <textarea cols="50" rows="10" class="task" id="detail" name="detail"></textarea>
             </form>
 
-            <h2>期日</h2>
+            <h2 class="text">期日</h2>
             <label class="switch2__label">
                 <input type="checkbox" class="switch2__input"/>
                 <span class="switch2__content"></span>
                 <span class="switch2__circle"></span>
             </label>
+            <h2 class="text" >曜日設定</h2>
 
 
         </nav>
