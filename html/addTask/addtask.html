@@ -138,20 +138,21 @@
 
         /*曜日設定*/
         .day_label{
-            text-align: center;
-            margin-right: 20px;
+            visibility: hidden;
+            margin-right: 10px;
         }
         .day_input{
             display: none;
         }
         .day_span{
+            margin: 5px;
             color: #808080;
             font-size: 20px;
             border: 1px solid #808080;
             border-radius: 50%;
             padding: 5px 7px; /*上下左右*/
         }
-        .day_input:checked + .day_span{
+       .day_input:checked + .day_span{
             color:#0000cd;
             border: 1px solid #0000cd;
             background: #87cefa;
@@ -171,9 +172,7 @@
             </span>
             <!-- 新しいタグを追加するボタン -->
             <button id="add-tag-button">+</button>
-            
 
-            
             <form>
                 <h2>内容</h2>
                 <input type="text" size="52" id="task" name="task" class="task" required>
@@ -183,42 +182,42 @@
 
             <h2 class="text">期日</h2>
             <label class="onoff_label">
-                <input type="checkbox" class="onoff_input"/>
+                <input type="checkbox" class="onoff_input" id="onoff" onclick="isChecked()">
                 <span class="onoff_content"></span>
                 <span class="onoff_circle"></span>
             </label>
             <h3 class="text" >曜日設定</h3>
 
             <br></br>
-
-            <label class="day_label">
+            <label class="day_label" id="mon">
                 <input class="day_input" type="checkbox" value="月" name="day">
                 <span class="day_span">月</span>
             </label>
-            <label class="day_label">
+            <label class="day_label" id="tue">
                 <input class="day_input" type="checkbox" value="火" name="day">
                 <span class="day_span">火</span>
             </label>
-            <label class="day_label">
+            <label class="day_label" id="wed">
                 <input class="day_input" type="checkbox" value="水" name="day">
                 <span class="day_span">水</span>
             </label>
-            <label class="day_label">
+            <label class="day_label" id="thu">
                 <input class="day_input" type="checkbox" value="木" name="day">
                 <span class="day_span">木</span>
             </label>
-            <label class="day_label">
+            <label class="day_label" id="fri">
                 <input class="day_input" type="checkbox" value="金" name="day">
                 <span class="day_span">金</span>
             </label>
-            <label class="day_label">
+            <label class="day_label" id="sat">
                 <input class="day_input" type="checkbox" value="土" name="day">
                 <span class="day_span">土</span>
             </label>
-            <label class="day_label">
+            <label class="day_label" id="sun">
                 <input class="day_input" type="checkbox" value="日" name="day">
                 <span class="day_span">日</span>
             </label>
+
 
             <br></br>
 
@@ -228,6 +227,27 @@
         </nav>
     </div>
     
-   
-    
+    <script>
+        function isChecked(){
+            if(document.getElementById('onoff').checked){
+                document.getElementById('mon').style.visibility="visible";
+                document.getElementById('tue').style.visibility="visible";
+                document.getElementById('wed').style.visibility="visible";
+                document.getElementById('thu').style.visibility="visible";
+                document.getElementById('fri').style.visibility="visible";
+                document.getElementById('sat').style.visibility="visible";
+                document.getElementById('sun').style.visibility="visible";
+            }
+            else{
+                document.getElementById('mon').style.visibility="hidden";
+                document.getElementById('tue').style.visibility="hidden";
+                document.getElementById('wed').style.visibility="hidden";
+                document.getElementById('thu').style.visibility="hidden";
+                document.getElementById('fri').style.visibility="hidden";
+                document.getElementById('sat').style.visibility="hidden";
+                document.getElementById('sun').style.visibility="hidden";
+            }
+        } 
+    </script>
+</body>  
 </html>
