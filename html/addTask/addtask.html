@@ -64,7 +64,7 @@
                 -ms-transition: all .1s .4s;
                 -o-transition: all .1s .4s;
                     transition: all .1s .4s;
-                overflow: hidden;
+                overflow: auto;
         }
         .onoff_content:before {
             content: "";
@@ -136,6 +136,13 @@
             _display: inline;
         }
 
+        /*日付設定*/
+        .date_label{
+            visibility: visible;
+            position: absolute;
+            right: 250px;
+        }
+
         /*曜日設定*/
         .day_label{
             visibility: hidden;
@@ -189,6 +196,13 @@
             <h3 class="text" >曜日設定</h3>
 
             <br></br>
+
+            <!-- 日付入力 -->
+            <label class="date_label">
+                <input type="date" id="date">
+            </label>
+
+            <!-- 曜日選択 -->
             <label class="day_label" id="mon">
                 <input class="day_input" type="checkbox" value="月" name="day">
                 <span class="day_span">月</span>
@@ -218,11 +232,10 @@
                 <span class="day_span">日</span>
             </label>
 
-
             <br></br>
 
-            <h3 style="text-align: right;">時間指定</h3>
-            <input type="time" name="time">
+            <h3 class="text" style="text-align: right;">時間指定</h3>
+            <input style="text-align: right;" type="time" name="time">
 
         </nav>
     </div>
@@ -230,6 +243,9 @@
     <script>
         function isChecked(){
             if(document.getElementById('onoff').checked){
+
+                document.getElementById('date').style.visibility="hidden";
+
                 document.getElementById('mon').style.visibility="visible";
                 document.getElementById('tue').style.visibility="visible";
                 document.getElementById('wed').style.visibility="visible";
@@ -239,6 +255,9 @@
                 document.getElementById('sun').style.visibility="visible";
             }
             else{
+
+                document.getElementById('date').style.visibility="visible";
+
                 document.getElementById('mon').style.visibility="hidden";
                 document.getElementById('tue').style.visibility="hidden";
                 document.getElementById('wed').style.visibility="hidden";
