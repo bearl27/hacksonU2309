@@ -15,133 +15,48 @@
     <link rel="apple-touch-icon" href="icon.png">
     <meta name="theme-color" content="#fafafa">
 
-    <style>
-        /* メニューバーのスタイル */
-        @font-face {
-            font-family: 'MyFont';
-            src: url(Mameron.otf);
-        }
-
-        body {
-            font-family: MyFont;
-            text-decoration: underline;
-        }
-
-        #tit {
-            margin-top: 5%;
-            /* 縦に5% */
-            margin-left: 35%;
-            /* 横に50% (中央) */
-            transform: translateX(-50%);
-            /* 横方向に中央揃え */
-            display: flex;
-            justify-content: center;
-            /* 水平方向に中央揃え */
-            align-items: center;
-            /* 垂直方向に中央揃え */
-            font-size: 4vw;
-        }
-
-
-        #menu-bar {
-            display: none;
-            /* 初期状態では非表示 */
-            background-color: #eee;
-            /* メニューバーの背景色 */
-            color: #333;
-            /* メニューバーのテキスト色 */
-            padding-top: 50px;9/10
-            /* メニューバーの内側の余白 */
-            width: 50%;
-            height: 100%;
-            position: fixed;
-            /*メニューバーを固定位置に配置 */
-            top: 0;
-            left: 0;
-            /* 左端に配置 */
-            z-index: 1;
-            /* メニューバーが他の要素の上に表示されるようにするためのz-index */
-        }
-
-        #menu-bar ul {
-            list-style: none;
-            /* リストスタイルを無効にする */
-            padding: 0;
-        }
-
-        #menu-bar ul li {
-            margin: 30px 30px;
-            /* メニュー項目の上下のマージン */
-        }
-
-        #menu-bar ul li a {
-            text-decoration: none;
-            /* リンクの下線を非表示 */
-            color: #333;
-            /* リンクのテキスト色 */
-        }
-
-        /* ボタンのスタイル */
-        #toggle-button {
-            background-color: #fff;
-            padding: 10px 20px;
-            color: #333;
-            border: 2px solid #333;
-            border-radius: 5px;
-            /* ボーダーの角を丸める場合は設定 */
-            cursor: pointer;
-            position: fixed;
-            top: 3;
-            left: 3;
-            z-index: 2;
-        }
-
-        #add-button {
-
-            width: 40px;
-            /* ボタンの幅 */
-            height: 40px;
-            /* ボタンの高さ */
-            border-radius: 50%;
-            /* ボタンを円形にする */
-            background-color: blue;
-            /* 背景色を青に設定 */
-            color: white;
-            /* テキストの色を白に設定 */
-            font-size: 30px;
-            /* テキストのサイズを調整 */
-            border: none;
-            /* ボーダーを無効にする */
-            cursor: pointer;
-            /* カーソルをポインターに変更 */
-            position: fixed;
-            top: 90%;
-            right: 3%;
-            z-index: 2;
-            padding-bottom: 6px;
-            line-height: 30px;
-            /* テキストの行の高さをボタンの高さと同じに設定 */
-        }
-    </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'base.css' %}">
+        <link rel="stylesheet" href="{% static 'button.css' %}">
+        <link rel="stylesheet" href="{% static 'menu-bar.css' %}">
+        <link rel="stylesheet" href="{% static 'underline.css' %}">
+        <link rel="stylesheet" href="{% static 'addbutton.css' %}">
+        <link rel="stylesheet" href="{% static 'list.css' %}">
 </head>
 
 <body>
     <!-- ボタン要素とメニューバー要素を取得 -->
-    <button id="toggle-button">≡</button>
+    <td><button id="toggle-button">メニューを表示</button></td>
     <nav id="menu-bar">
+        <nav id="option-button">
+            <a href="{% url 'todo_home' %}"><img src="{% static 'option.png' %}" alt="option"></a>
+        </nav>
         <ul>
-            <li><a href="{% url 'list' %}">ホーム</a></li>
-            <li><a href="{% url 'todo_home' %}">今日のToDo</a></li>
-            {% now "Y" as current_year %}
-            {% now "m" as current_month %}
-            <li><a href="{% url 'calender' year=current_year month=current_month %}">カレンダー</a></li>
-
-            <li><a href="{% url 'category' %}">カテゴリー管理</a></li>
-            <li><a href="{% url 'todo_home' %}">設定</a></li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'list' %}">ホーム</a>
+                </span>
+            </li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'todo_home' %}">今日のTodo</a>
+                </span>
+            </li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    {% now "Y" as current_year %}
+                    {% now "m" as current_month %}
+                    <a href="{% url 'calender' year=current_year month=current_month %}">カレンダー</a>
+                </span>
+            </li>
+            <li class="textWrapper">
+                <span class="backgroundImage">
+                    <a href="{% url 'category' %}">カテゴリー管理</a>
+                </span>
+            </li>
         </ul>
     </nav>
 
@@ -197,25 +112,8 @@
     </div>
 
     <p><a href="{% url 'create_todo' %}"><button id="add-button">＋</button></a></p>
+    <script src="{% static 'script.js' %}"></script>
 
-    <script>
-        // ボタン要素とメニューバー要素を取得
-        const toggleButton = document.getElementById('toggle-button');
-        const menuBar = document.getElementById('menu-bar');
-
-        // ボタンをクリックしたときの動作を設定
-        toggleButton.addEventListener("click", () => {
-            // メニューバーの表示状態を切り替える
-            if (menuBar.style.display === 'none' || menuBar.style.display === '') {
-                menuBar.style.display = 'block'; // メニューバーを表示
-                toggleButton.textContent = 'x'; // ボタンのテキストを変更
-            } else {
-                menuBar.style.display = 'none'; // メニューバーを非表示
-                toggleButton.textContent = '≡'; // ボタンのテキストを変更
-            }
-        });
-
-    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
