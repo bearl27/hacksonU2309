@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>メニューバーの色変更</title>
+    <title>カテゴリー管理</title>
+    <h1>カテゴリー管理</h1>
     <style>
         /* tag ボタンの親要素のスタイル（画面上部中央に配置） */
         .tag-container {
@@ -34,9 +35,9 @@
 
             position: fixed;
             /* 固定位置に配置 */
-            top: 493px;
+            top: 502px;
             /* 画面中央に配置 */
-            left: 50%;
+            left: 48%;
             /* 画面中央に配置 */
             transform: translate(-50%, -50%);
             /* 中央に配置 */
@@ -157,6 +158,12 @@
         #tag-form {
             display: none;
         }
+
+        .title-form{
+            background-color: #dcdcdc;
+            border: 1px solid #808080;
+            font-size: 100%;
+        }
     </style>
 </head>
 
@@ -196,6 +203,13 @@
             <button id="lime-button" class="color-button">&nbsp&nbsp&nbsp&nbsp</button>
             <button id="violet-button" class="color-button">&nbsp&nbsp&nbsp&nbsp</button>
             <button id="indigo-button" class="color-button">&nbsp&nbsp&nbsp&nbsp</button>
+
+            <h2>タイトル</h2>
+            <form>
+                <input type="text" size="55" id="tag-id" name="tag-id" class="title-form" required>
+            </form>
+
+            <h2>期日設定</h2>
 
         </nav>
     </div>
@@ -310,6 +324,8 @@
         });
 
     </script>
+    
+    
 </body>
 
 </html>
