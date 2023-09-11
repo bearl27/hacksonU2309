@@ -142,8 +142,8 @@
     <td><button id="toggle-button">≡</button></td>
     <nav id="menu-bar">
         <ul>
-            <li><a href="{% url 'todo_home' %}">ホーム</a></li>
-            <li><a href="{% url 'list' %}">Todoリスト一覧</a></li>
+            <li><a href="{% url 'list' %}">ホーム</a></li>
+            <li><a href="{% url 'todo_home' %}">今日のTodo</a></li>
             {% now "Y" as current_year %}
             {% now "m" as current_month %}
             <li><a href="{% url 'calender' year=current_year month=current_month %}">カレンダー</a></li>
@@ -153,7 +153,8 @@
     </nav>
 
     <h1 id="tit">Todoリスト一覧</h1>
-    <h2>重さ考慮</h2>
+    <h2>重さと日付考慮</h2>
+    <a href="{% url 'todo_importance' %}">重さのみ考慮</a>
 
     <div>
         <table>
