@@ -24,18 +24,22 @@
         }
     </style>
 </head>
-<body>
-<div>
-    <h1>Tasks</h1>
-<h1>タスクの削除</h1>
-<form action="" method="POST">{% csrf_token %}
-    <p>{{task.title}}</p>
-    <input type="submit" value="delete">
-    <div class="container">
 
-        <div>
-        <a href="{% url 'todo_home' %}"><button type="button" class="ms-1 btn btn-primary"> ToDoリスト</button></a>
-        </div>
+<body>
+    <div>
+        <h1>選択されたタスクの削除</h1>
+        <form action="{% url 'delete' %}" method="POST">{% csrf_token %}
+            {% for task in tasks %}
+              <p>{{ task.title }}</p>
+              <!-- 各タスクのIDを隠しフィールドとしてフォームに追加 -->
+              <input type="hidden" name="task_ids" value="{{ task.id }}">
+            {% endfor %}
+            <!-- 削除の確認用の隠しフィールド -->
+            <input type="hidden" name="confirm" value="yes">
+            <input type="submit" value="選択したタスクを削除">
+            <a href="{% url 'todo_home' %}"><button type="button">ToDoリストに戻る</button></a>
+        </form>
     </div>
-</form>
-</body>
+
+    </body>
+

@@ -62,51 +62,69 @@
         <h1>Tasks</h1>
         <ul>
 
-            <table>
+            <form method="post" action="{% url 'delete' %}">
+                {% csrf_token %}
 
-                {% for task in tasks %}
-                {% with task.deadline|date:"m" as task_month %}
-                {% if now == task.deadline %}
-                <div class="btn-container">
-                    <tr>
-                        <th>
-                            <button2 class="btn-trigger" data-trget="modal">{{task.title}}</button2>
-                        </th>
-                    </tr>
-                </div>
+                <table>
+                    {% for task in tasks %}
+                    {% with task.deadline|date:"m" as task_month %}
+                    {% if now == task.deadline %}
+                    <div class="btn-container">
+                        <tr>
+                            <td><input type="checkbox" name="task_ids" value="{{ task.id }}" /></td>
+                            <th>
+                                <button2 class="btn-trigger" data-trget="modal">{{task.title}}</button2>
+                            </th>
+                        </tr>
+                    </div>
+                    <div id="mask" class="hidden"></div>
 
-                <div id="mask" class="hidden"></div>
+                    <section id="modal" class="hidden">
+                        <p>
+                            {{task.title}}<br>
+                            <br>
+                            {{task.description}}<br>
+                            <br>
+                            {{task.deadline}}<br>
+                            <br>
+                            <a href="{% url 'update' task.pk %}">編集</a>
+                        </p>
+                    </section>
+                    {% endif %}
+                    {% endwith %}
+                    {% endfor %}
+                </table>
+                <button type="submit" id="deleteSelectedButton" style="display: none;">選択したタスクを削除</button>
 
-                <section id="modal" class="hidden">
-                    <p>
-                        {{task.title}}<br>
-                        <br>
-                        {{task.description}}<br>
-                        <br>
-                        {{task.deadline}}<br>
-                        <br>
-                        <a href="{% url 'update' task.pk %}">編集</a> <a href="{% url 'delete' task.pk %}">削除</a>
-                    </p>
-                </section>
-
-                <!-- <th>{{ task.title }}</th>
-                    <th>{{ task.deadline }}</th>
-                    <th><a href="{% url 'detail' task.pk %}">詳細</a></th>
-                    <th><a href="{% url 'update' task.pk %}">編集</a></th>
-                    <th><a href="{% url 'delete' task.pk %}">削除</a></th>  -->
-                {% endif %}
-                {% endwith %}
-                {% endfor %}
-                <tr>
-
-
-                </tr>
-            </table>
-        </ul>
-    </div>
+            </form>
 
     <p><a href="{% url 'create_todo' %}"><button id="add-button">+</button></a></p>
 
     <script src="{% static 'script.js' %}"></script>
     <script src="{% static 'home.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let checkboxes = document.querySelectorAll('input[type="checkbox"][name="task_ids"]');
+            let deleteButton = document.getElementById('deleteSelectedButton');
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    // チェックされているチェックボックスの数を数える
+                    let checkedCount = 0;
+                    checkboxes.forEach(function(c) {
+                        if (c.checked) {
+                            checkedCount++;
+                        }
+                    });
+
+                    // チェックが一つ以上あればボタンを表示、なければ非表示
+                    if (checkedCount > 0) {
+                        deleteButton.style.display = 'block';
+                    } else {
+                        deleteButton.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>

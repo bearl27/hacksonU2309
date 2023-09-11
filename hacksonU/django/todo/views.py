@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView
 from .models import Todo, TodoDay
 from .forms import TodoForm
 from django.urls import reverse_lazy
@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.views import generic
+from django.views import View
 from . import mixins
 from datetime import date
 
@@ -61,15 +61,21 @@ class TodoUpdate(UpdateView):
         return response
 
 
-class TodoDelete(DeleteView):
-    model = Todo
-    context_object_name = "task"
-    success_url = reverse_lazy("list")
+class BulkDeleteTasks(View):
+    template_name = 'todo/todo_confirm_delete.html'
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.delete()
-        return HttpResponseRedirect(self.get_success_url())
+    def post(self, request):
+        task_ids = request.POST.getlist('task_ids')
+        tasks_to_delete = Todo.objects.filter(id__in=task_ids)
+
+        if 'confirm' in request.POST:
+            tasks_to_delete.delete()
+            return redirect('list')
+
+        context = {
+            'tasks': tasks_to_delete
+        }
+        return render(request, self.template_name, context)
 
 
 class TodoCalender(ListView, mixins.MonthCalendarMixin):
