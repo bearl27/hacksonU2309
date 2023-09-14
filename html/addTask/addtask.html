@@ -165,6 +165,71 @@
             background: #87cefa;
         }
 
+        /*５段階評価*/
+        .weightbar{
+            position: relative;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .weightbar li {
+            position: relative;
+            list-style-type: none;
+            text-align: center;
+            text-transform: uppercase;
+            width: 20%;
+            color: #000000;
+            font-weight: bold;
+        }
+        .weightbar li:before {/*ステップの横に棒を作成*/
+            display: block;
+            width: 18px;
+            height: 18px;
+            margin: 7px auto 20px auto;
+            content: '';
+            text-align: center;
+            border-radius: 50%;
+            background-color: #F5F5F5;
+        }
+        .weightbar li:after {
+            position: absolute;
+            z-index: -1;
+            top: 15px;
+            left: -50%;
+            width: 100%;
+            height: 2px;
+            content: '';
+            background-color: #F5F5F5;
+        }
+        .weightbar li:first-child:after {
+            content: none;
+        }
+        .weightbar li.active:before,
+        .weightbar li.lower:before {
+            background-color: #0070BD;
+        }
+        .weightbar li.active:after,
+        .weightbar li.lower:after {
+            background-color: #0070BD;
+        }
+        .weightbar li.higher:before{
+            background-color: #F5F5F5;
+        }
+        .weightbar li.higher:after{
+            background-color: #F5F5F5;
+        }
+        /* 装飾 */
+        ul{
+        margin: 40px 0 !important;
+        }
+        body{
+        margin: 40px 20px;
+        }
+
+
+
     </style>
 </head>
 <body class="body" style="background-color:#f6f6e6;">
@@ -237,6 +302,16 @@
             <h3 class="text" style="text-align: right;">時間指定</h3>
             <input style="text-align: right;" type="time" name="time">
 
+            <br></br>
+
+            <ul class="weightbar">
+                <li class="active" onclick="classChange()" id="1">1</li>
+                <li  onclick="classChange()" id="2">2</li>
+                <li onclick="classChange()" id="3">3</li>
+                <li onclick="classChange()" id="4">4</li>
+                <li onclick="classChange()" id="5">5</li>
+            </ul>
+ 
         </nav>
     </div>
     
@@ -266,7 +341,20 @@
                 document.getElementById('sat').style.visibility="hidden";
                 document.getElementById('sun').style.visibility="hidden";
             }
-        } 
+
+        }
+        function classChange(){
+            if(document.getElementById('2').onclick){
+                document.getElementById('1').className="active";
+
+                document.getElementById('2').className="higher";
+            }
+            if(document.getElementById('2').onclick){
+                document.getElementById('2').className="active";
+
+                document.getElementById('1').className="lower";
+            }
+        }
     </script>
 </body>  
 </html>
