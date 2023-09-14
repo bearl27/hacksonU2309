@@ -166,15 +166,58 @@
         }
 
         /*５段階評価*/
-        .weightbar{
-            position: relative;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        .stepbar-row {
+            padding: 0 64px;
+            width: 100%;
         }
-        .weightbar li {
+
+        .stepbar {
+            display: flex;
+            position: relative;
+            padding: 0;
+            text-align: center;
+        }
+
+        .stepbar li {
+            font-size: 12px;
+            list-style: none;
+            padding-left: 68px;
+            position: relative;
+            max-width: 100px;
+        }
+
+        .stepbar li:before {
+            display: block;
+            width: 18px;
+            height: 18px;
+            margin: 7px auto 20px auto;
+            content: '';
+            text-align: center;
+            border-radius: 50%;
+            background-color: #BDBDBD;
+        }
+
+        .stepbar li:after {
+            position: absolute;
+            z-index: -1;
+            top: 15px;
+            left: -20%;
+            width: 100%;
+            height: 2px;
+            content: '';
+            background-color: #BDBDBD;
+        }
+
+        .stepbar li:first-child {
+            padding-left: 50px;
+            width: 32px;
+        }
+
+        .stepbar li:first-child:after {
+            display: none;
+        }
+
+        .stepbar li span {
             position: relative;
             list-style-type: none;
             text-align: center;
@@ -183,50 +226,12 @@
             color: #000000;
             font-weight: bold;
         }
-        .weightbar li:before {/*ステップの横に棒を作成*/
-            display: block;
-            width: 18px;
-            height: 18px;
-            margin: 7px auto 20px auto;
-            content: '';
-            text-align: center;
-            border-radius: 50%;
-            background-color: #F5F5F5;
+
+        .stepbar .done:after,
+        .stepbar .done:before {
+            background-color: #E65100;
         }
-        .weightbar li:after {
-            position: absolute;
-            z-index: -1;
-            top: 15px;
-            left: -50%;
-            width: 100%;
-            height: 2px;
-            content: '';
-            background-color: #F5F5F5;
-        }
-        .weightbar li:first-child:after {
-            content: none;
-        }
-        .weightbar li.active:before,
-        .weightbar li.lower:before {
-            background-color: #0070BD;
-        }
-        .weightbar li.active:after,
-        .weightbar li.lower:after {
-            background-color: #0070BD;
-        }
-        .weightbar li.higher:before{
-            background-color: #F5F5F5;
-        }
-        .weightbar li.higher:after{
-            background-color: #F5F5F5;
-        }
-        /* 装飾 */
-        ul{
-        margin: 40px 0 !important;
-        }
-        body{
-        margin: 40px 20px;
-        }
+        
 
 
 
@@ -304,13 +309,15 @@
 
             <br></br>
 
-            <ul class="weightbar">
-                <li class="active" onclick="classChange()" id="1">1</li>
-                <li  onclick="classChange()" id="2">2</li>
-                <li onclick="classChange()" id="3">3</li>
-                <li onclick="classChange()" id="4">4</li>
-                <li onclick="classChange()" id="5">5</li>
-            </ul>
+            <div class="stepbar-row">
+                <ul class="stepbar">
+                    <li class="step"><span>1</span></li>
+                    <li class="step"><span>2</span></li>
+                    <li class="step"><span>3</span></li>
+                    <li class="step"><span>4</span></li>
+                    <li class="step"><span>5</span></li>
+                </ul>
+            </div>
  
         </nav>
     </div>
@@ -343,18 +350,28 @@
             }
 
         }
-        function classChange(){
-            if(document.getElementById('2').onclick){
-                document.getElementById('1').className="active";
+        // JavaScriptを使用して、クリックされたステップを"done"に変更します
+        const steps = document.querySelectorAll('.step');
 
-                document.getElementById('2').className="higher";
-            }
-            if(document.getElementById('2').onclick){
-                document.getElementById('2').className="active";
-
-                document.getElementById('1').className="lower";
-            }
-        }
+        steps.forEach(step => {
+            step.addEventListener('click', () => {
+                const stepId = parseInt(step.textContent);
+                // クリックされたステップより前のステップを"done"に設定
+                for (let i = 1; i <= stepId; i++) {
+                    const currentStep = document.querySelector(`.step:nth-child(${i})`);
+                    if (currentStep) {
+                        currentStep.classList.add('done');
+                    }
+                }
+                // クリックされたステップより後のステップをリセット
+                for (let i = stepId + 1; i <= steps.length; i++) {
+                    const nextStep = document.querySelector(`.step:nth-child(${i})`);
+                    if (nextStep) {
+                        nextStep.classList.remove('done');
+                    }
+                }
+            });
+        });
     </script>
 </body>  
 </html>
