@@ -1,0 +1,34 @@
+<!-- title_page.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="todoリスト">
+    <meta name="description" content="タスクちゃん">
+    <meta name="description" content="Rits小町">
+    <title>タスクちゃん</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">サービス紹介</a></li>
+            <li><a href="#">最新情報</a></li>
+            <li><a href="#">ブログ</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <img src="./image.png" alt="logo">
+    </main>
+    <div class="login">
+        <a href="{% url 'login' %}" class="btn btn-border">ログイン</a>
+    </div>
+</body>
+
+</html>
