@@ -61,7 +61,7 @@
 
         /*日付設定*/
         .date_label{
-            right: 280px;
+            right: 230px;
             display: block;
             position: absolute;
         }
@@ -70,7 +70,7 @@
 
         /*５段階評価*/
         .stepbar-row {
-            padding: 0 64px;
+            padding: 0 30px;
             width: 100%;
         }
 
@@ -188,11 +188,6 @@
             <br></br>
 
             <h2 class="text">期日</h2>
-            <label class="onoff_label">
-                <input type="checkbox" class="onoff_input" id="onoff" onclick="isChecked()">
-                <span class="onoff_content"></span>
-                <span class="onoff_circle"></span>
-            </label>
 
             <br></br>
 
@@ -224,33 +219,6 @@
     </div>
     
     <script>
-        function isChecked(){
-            if(document.getElementById('onoff').checked){
-
-                document.getElementById('date').style.display="none";
-
-                document.getElementById('mon').style.display="inline-block";
-                document.getElementById('tue').style.display="inline-block";
-                document.getElementById('wed').style.display="inline-block";
-                document.getElementById('thu').style.display="inline-block";
-                document.getElementById('fri').style.display="inline-block";
-                document.getElementById('sat').style.display="inline-block";
-                document.getElementById('sun').style.display="inline-block";
-            }
-            else{
-
-                document.getElementById('date').style.display="inline-block";
-
-                document.getElementById('mon').style.display="none";
-                document.getElementById('tue').style.display="none";
-                document.getElementById('wed').style.display="none";
-                document.getElementById('thu').style.display="none";
-                document.getElementById('fri').style.display="none";
-                document.getElementById('sat').style.display="none";
-                document.getElementById('sun').style.display="none";
-            }
-
-        }
         // JavaScriptを使用して、クリックされたステップを"done"に変更します
         const steps = document.querySelectorAll('.step');
 
