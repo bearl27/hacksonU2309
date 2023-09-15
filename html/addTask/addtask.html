@@ -50,90 +50,7 @@
             font-size: 100%;
         }
 
-        /*オンオフスイッチ*/
-        .onoff_label {
-            width: 44px;
-            position: relative;
-            display: inline-block;
-            text-align: right;
-        }
-        .onoff_content {
-            display: block;
-            cursor: pointer;
-            position: relative;
-            border-radius: 30px;
-            height: 20px;
-            -webkit-transition: all .1s .4s;
-            -moz-transition: all .1s .4s;
-                -ms-transition: all .1s .4s;
-                -o-transition: all .1s .4s;
-                    transition: all .1s .4s;
-                overflow: auto;
-        }
-        .onoff_content:before {
-            content: "";
-            display: block;
-            position: absolute;
-            width: calc(100% - 4px);
-            height: calc(100% - 4px);
-            top: 0;
-            left: 0;
-            border: 2px solid #000000;
-            border-radius: 20px;
-            background-color: #dcdcdc;
-        }
-        .onoff_content:after {
-            content: "";
-            display: block;
-            position: absolute;
-            background-color: transparent;
-            width: 0;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border-radius: 20px;
-            -webkit-transition: all .5s;
-            -moz-transition: all .5s;
-                -ms-transition: all .5s;
-                -o-transition: all .5s;
-                    transition: all .5s;
-        }
-        .onoff_input {
-            display: none;
-        }
-        .onoff_circle {
-            display: block;
-            top: 5px;
-            left: 5px;
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            -webkit-border-radius: 10px;
-                    border-radius: 10px;
-            background-color: #000000;
-            -webkit-transition: all .5s;
-            -moz-transition: all .5s;
-                -ms-transition: all .5s;
-                -o-transition: all .5s;
-                    transition: all .5s;
-        }
-        .onoff_input:checked ~ .onoff_circle {
-            left: 29px;
-            background-color: #fff;
-        }
-        .onoff_input:checked ~ .onoff_content {
-            border-color: transparent;
-            -webkit-transition: all 0s;
-            -moz-transition: all 0s;
-                -ms-transition: all 0s;
-                -o-transition: all 0s;
-                    transition: all 0s;
-        }
-        .onoff_input:checked ~ .onoff_content:after {
-            background-color: #6495ed;
-            width: 100%;
-        }
-
+        
         .text{
             /*改行を防ぐ*/
             display: inline-block;
@@ -149,28 +66,7 @@
             position: absolute;
         }
 
-        /*曜日設定*/
-        .day_label{
-            text-align: center;
-            display: none;
-            margin-right: 10px;
-        }
-        .day_input{
-            display: none;
-        }
-        .day_span{
-            margin: 5px;
-            color: #808080;
-            font-size: 20px;
-            border: 1px solid #808080;
-            border-radius: 50%;
-            padding: 5px 7px; /*上下左右*/
-        }
-       .day_input:checked + .day_span{
-            color:#0000cd;
-            border: 1px solid #0000cd;
-            background: #87cefa;
-        }
+       
 
         /*５段階評価*/
         .stepbar-row {
@@ -297,7 +193,6 @@
                 <span class="onoff_content"></span>
                 <span class="onoff_circle"></span>
             </label>
-            <h3 class="text" >曜日設定</h3>
 
             <br></br>
 
@@ -305,41 +200,6 @@
             <label class="date_label">
                 <input type="date" id="date">
             </label>
-
-            <!-- 曜日選択 -->
-            <label class="day_label" id="mon">
-                <input class="day_input" type="checkbox" value="月" name="day">
-                <span class="day_span">月</span>
-            </label>
-            <label class="day_label" id="tue">
-                <input class="day_input" type="checkbox" value="火" name="day">
-                <span class="day_span">火</span>
-            </label>
-            <label class="day_label" id="wed">
-                <input class="day_input" type="checkbox" value="水" name="day">
-                <span class="day_span">水</span>
-            </label>
-            <label class="day_label" id="thu">
-                <input class="day_input" type="checkbox" value="木" name="day">
-                <span class="day_span">木</span>
-            </label>
-            <label class="day_label" id="fri">
-                <input class="day_input" type="checkbox" value="金" name="day">
-                <span class="day_span">金</span>
-            </label>
-            <label class="day_label" id="sat">
-                <input class="day_input" type="checkbox" value="土" name="day">
-                <span class="day_span">土</span>
-            </label>
-            <label class="day_label" id="sun">
-                <input class="day_input" type="checkbox" value="日" name="day">
-                <span class="day_span">日</span>
-            </label>
-
-            <br></br>
-
-            <h3 class="text">時間指定</h3>
-            <input type="time" name="time">
 
             <br></br>
 
