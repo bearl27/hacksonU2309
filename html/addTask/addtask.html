@@ -34,6 +34,9 @@
             overflow-y: auto;
         }
 
+        /*カテゴリ選択*/
+
+
         .task{
             text-align: center;
             background-color: #dcdcdc;
@@ -269,14 +272,15 @@
     <div id="menu-container">
         <nav id="menu-bar">
             <h2>カテゴリ選択</h2>
-            
-            <span class="tags">
-                <button id="a" class="tag">買い物</button>
-                <button id="b" class="tag">勉強</button>
-                <button id="c" class="tag">筋トレ</button>
-            </span>
-            <!-- 新しいタグを追加するボタン -->
-            <button id="add-tag-button">+</button>
+             <div class="tag-container">
+        <span class="tags">
+            <button id="a" class="tag">買い物</button>
+            <button id="b" class="tag">勉強</button>
+            <button id="c" class="tag">筋トレ</button>
+        </span>
+        <!-- 新しいタグを追加するボタン -->
+        <button id="add-tag-button">+</button>
+    </div>
 
             <form">
                 <h2>内容</h2>
